@@ -43,6 +43,8 @@ def take_session key
   res
 end
 
+messages_queue # ensures that the queue's created before we publish to the exchange.
+
 get '/' do
   @published = take_session(:published)
   @got = take_session(:got)
