@@ -2,7 +2,6 @@ require 'sinatra'
 require 'erb'
 require 'cgi'
 
-require 'rabbitmq_service_util'
 require 'bunny'
 
 enable :sessions
@@ -14,7 +13,7 @@ enable :sessions
 # connection across many requests.
 def client
   unless $client
-    c = Bunny.new(RabbitMQ::amqp_connection_url)
+    c = Bunny.new(ENV['RABBITMQ_BIGWIG_URL'])
     c.start
     $client = c
 
